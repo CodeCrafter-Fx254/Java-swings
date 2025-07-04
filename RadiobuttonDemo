@@ -1,0 +1,70 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class RadioButtonDemo extends JFrame implements ActionListener {
+    private JLabel imageLabel;
+    private JRadioButton birdBtn, catBtn, dogBtn, rabbitBtn, pigBtn;
+    private ButtonGroup group;
+
+    public RadioButtonDemo() {
+        setTitle("RadioButtonDemo");
+        setLayout(new FlowLayout());
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Radio buttons
+        birdBtn = new JRadioButton("Bird");
+        catBtn = new JRadioButton("Cat");
+        dogBtn = new JRadioButton("Dog");
+        rabbitBtn = new JRadioButton("Rabbit");
+        pigBtn = new JRadioButton("Pig");
+
+        group = new ButtonGroup();
+        group.add(birdBtn);
+        group.add(catBtn);
+        group.add(dogBtn);
+        group.add(rabbitBtn);
+        group.add(pigBtn);
+
+        // Add action listeners
+        birdBtn.addActionListener(this);
+        catBtn.addActionListener(this);
+        dogBtn.addActionListener(this);
+        rabbitBtn.addActionListener(this);
+        pigBtn.addActionListener(this);
+
+        // Panel for buttons
+        JPanel buttonPanel = new JPanel(new GridLayout(5, 1));
+        buttonPanel.add(birdBtn);
+        buttonPanel.add(catBtn);
+        buttonPanel.add(dogBtn);
+        buttonPanel.add(rabbitBtn);
+        buttonPanel.add(pigBtn);
+
+        // Label for image
+        imageLabel = new JLabel();
+        imageLabel.setPreferredSize(new Dimension(200, 200));
+
+        add(buttonPanel);
+        add(imageLabel);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String imageName = "";
+        if (e.getSource() == birdBtn) imageName = "bird.png";
+        else if (e.getSource() == catBtn) imageName = "cat.png";
+        else if (e.getSource() == dogBtn) imageName = "dog.png";
+        else if (e.getSource() == rabbitBtn) imageName = "rabbit.png";
+        else if (e.getSource() == pigBtn) imageName = "pig.png";
+
+        ImageIcon icon = new ImageIcon("images/" + imageName); // Place your images inside "images" folder
+        imageLabel.setIcon(icon);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new RadioButtonDemo().setVisible(true);
+        });
+    }
+}
